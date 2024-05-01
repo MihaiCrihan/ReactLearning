@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    background: #EEEEEE;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -7,17 +8,24 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.d-flex {
+    display: flex;
 }
 
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
 
 @media (prefers-reduced-motion: no-preference) {
     .App-logo {
-        animation: App-logo-spin infinite 15s linear;
+        animation: App-logo-spin infinite 5s linear;
     }
 }
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
@@ -27,3 +35,197 @@ code {
     }
 }
 
+.main,
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+header {
+    background: #fff;
+    padding: 0 24px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+header .nav {
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    gap: 24px;
+    margin-left: auto;
+}
+
+header .nav li {
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+header .nav li:hover {
+    transform: translateY(-2px);
+}
+
+.hero {
+    background: url("../img/banner-pizza.jpg");
+    height: 500px;
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    padding: 0 32px;
+    background-position: center center;
+    margin-bottom: 60px;
+}
+
+.hero-title {
+    font-size: 62px;
+    font-weight: 600;
+    color: #ffffff;
+    width: 40%;
+    line-height: 70px;
+    margin: 0;
+}
+
+.hero-subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: #ffffff;
+    width: 50%;
+    text-transform: uppercase;
+    margin-top: 12px;
+}
+
+.main .item {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+
+.main .item-card {
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    position: relative;
+    background: #ffffff;
+}
+
+.main .item-card .category {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #FEF8DF;
+    padding: 4px 8px;
+    font-weight: 500;
+}
+
+.main .item-card .price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0d540d;
+}
+
+.main .item-card .card-body {
+    padding: 0 24px 24px;
+}
+
+.add-to-card {
+    align-items: center;
+    appearance: none;
+    border-radius: 4px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 1px -2px, rgba(0, 0, 0, .14) 0 2px 2px 0, rgba(0, 0, 0, .12) 0 1px 5px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: Roboto, sans-serif;
+    font-size: .875rem;
+    font-weight: 500;
+    height: 36px;
+    justify-content: center;
+    min-width: 64px;
+    outline: none;
+    padding: 0 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    will-change: transform, opacity;
+}
+
+.add-to-card:hover {
+    box-shadow: rgba(0, 0, 0, .2) 0 2px 4px -1px, rgba(0, 0, 0, .14) 0 4px 5px 0, rgba(0, 0, 0, .12) 0 1px 10px 0;
+}
+
+.add-to-card:disabled {
+    background-color: rgba(0, 0, 0, .12);
+    box-shadow: rgba(0, 0, 0, .2) 0 0 0 0, rgba(0, 0, 0, .14) 0 0 0 0, rgba(0, 0, 0, .12) 0 0 0 0;
+    color: rgba(0, 0, 0, .37);
+    cursor: default;
+    pointer-events: none;
+}
+
+.add-to-card:not(:disabled) {
+    background-color: #e5aa02;
+}
+
+.add-to-card:focus {
+    box-shadow: rgba(0, 0, 0, .2) 0 2px 4px -1px, rgba(0, 0, 0, .14) 0 4px 5px 0, rgba(0, 0, 0, .12) 0 1px 10px 0;
+}
+
+.add-to-card:active {
+    box-shadow: rgba(0, 0, 0, .2) 0 5px 5px -3px, rgba(0, 0, 0, .14) 0 8px 10px 1px, rgba(0, 0, 0, .12) 0 3px 14px 2px;
+    background: #ffbd03;
+}
+
+.main .item-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+}
+
+footer {
+    margin-top: 60px;
+    background: #333333;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.shop-cart-btn {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    transition: color 0.2s ease-in-out;
+    padding: 12px;
+}
+
+.shop-cart-btn:hover,
+.shop-cart-btn.active,
+.shop-cart-btn:active {
+    color: #dc3d3d;
+}
+
+.shop-cart {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    min-height: 100px;
+    background: #fff;
+    border: 1px solid gray;
+}
