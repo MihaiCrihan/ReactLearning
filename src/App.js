@@ -3,6 +3,8 @@ import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Items from "./components/Items";
 import React, {useState} from "react";
+import Categories from "./components/Categories";
+import ShowFullItem from "./components/ShowFullItem";
 
 const App = () => {
     const [items, setItems] = useState(
@@ -12,7 +14,7 @@ const App = () => {
                 title: "Margherita Pizza",
                 img: "classic-cheese-pizza.jpg",
                 description: "Classic Italian pizza with tomato sauce, mozzarella cheese, and fresh basil.",
-                category: "Vegetarian",
+                category: "vegetarian",
                 price: 9.99,
             },
             {
@@ -20,7 +22,7 @@ const App = () => {
                 title: "Pepperoni Pizza",
                 img: "classic-cheese-pizza2.jpg",
                 description: "Delicious pizza topped with pepperoni slices and melted cheese.",
-                category: "Meat",
+                category: "meat",
                 price: 12.99,
             },
             {
@@ -28,7 +30,7 @@ const App = () => {
                 title: "Hawaiian Pizza",
                 img: "classic-cheese-pizza.jpg",
                 description: "A tropical delight featuring ham, pineapple, and mozzarella cheese.",
-                category: "Meat",
+                category: "meat",
                 price: 11.99,
             },
             {
@@ -36,7 +38,7 @@ const App = () => {
                 title: "Vegetarian Pizza",
                 img: "classic-cheese-pizza3.jpg",
                 description: "Loaded with fresh vegetables like bell peppers, onions, and olives.",
-                category: "Vegetarian",
+                category: "vegetarian",
                 price: 10.99,
             },
             {
@@ -44,7 +46,7 @@ const App = () => {
                 title: "BBQ Chicken Pizza",
                 img: "classic-cheese-pizza1.jpg",
                 description: "Tender chicken, BBQ sauce, and red onions on a crispy pizza crust.",
-                category: "Meat",
+                category: "meat",
                 price: 13.99,
             },
             {
@@ -52,22 +54,63 @@ const App = () => {
                 title: "Mushroom Pizza",
                 img: "classic-cheese-pizza.jpg",
                 description: "Savory pizza with a generous topping of mushrooms and melted cheese.",
-                category: "Vegetarian",
+                category: "vegetarian",
                 price: 10.49,
             },
         ]
     );
 
+    const [fullItem, setFullItem] = useState({})
+    const [showFullItem, setShowFullItem] = useState(false)
+    const [currentItems, setCurrentItems] = useState(items)
+    const [orders, setOrders] = useState([])
+
+    const addToOrder = (item) => {
+        let isInArray = false
+        orders.forEach(el => {
+            if (el.id === item.id) {
+                isInArray = true
+            }
+        })
+        if (!isInArray) {
+            setOrders([...orders, item])
+        }
+    }
+
+    const deleteOrder = (id) => {
+        setOrders(orders.filter(el => el.id !== id))
+    }
+
+    const onShowItem = (item) => {
+        setFullItem(item)
+        setShowFullItem(!showFullItem)
+        console.log(showFullItem)
+    }
+
+    const chooseCategory = (category) => {
+        setCurrentItems(items.filter(el => el.category === category))
+
+        if (category === 'all') {
+            setCurrentItems(items)
+        }
+    }
+
     return (
         <div className="app">
-            <Header title="React"/>
+            <Header title="React" orders={orders} onDelete={deleteOrder}/>
             <div className="main">
                 <Hero/>
-                <Items items={items}/>
+                <Categories chooseCategory={chooseCategory}/>
+                <Items onShowItem={onShowItem} items={currentItems} onAdd={addToOrder} />
             </div>
+            {showFullItem && (
+                <ShowFullItem item={fullItem} onAdd={addToOrder} onShowItem={onShowItem}/>
+            )}
             <Footer/>
         </div>
     );
+
+
 };
 
 export default App;

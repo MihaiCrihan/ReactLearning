@@ -5,7 +5,7 @@ export default function Items(props) {
     return (
         <div className="item">
             {props.items.map((el) => (
-                <Item key={el.id} item={el}/>
+                <Item onShowItem={props.onShowItem} key={el.id} item={el} onAdd={props.onAdd}/>
             ))}
         </div>
     )
