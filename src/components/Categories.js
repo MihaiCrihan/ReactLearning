@@ -13,7 +13,7 @@ const Categories = (props) => {
     return (
         <div className="categories">
             {categories.map(el => (
-                <div key={el.id} onClick={() => props.chooseCategory(el.id)}> {el.name}</div>
+                <div className="chip" key={el.id} onClick={() => props.chooseCategory(el.id)}> {el.name}</div>
             ))}
         </div>
     );

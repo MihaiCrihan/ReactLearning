@@ -1,3 +1,12 @@
+:root {
+    --primary-color: #DCEBF9;
+    --secondary-color: #E9E9E9;
+    --success-color: #E8FAEA;
+    --warning-color: #FCF3D9;
+    --error-color: #F1E3E0;
+}
+
+
 body {
     margin: 0;
     background: #EEEEEE;
@@ -130,8 +139,10 @@ header .nav li:hover {
     font-size: 18px;
     font-weight: bold;
     color: #0d540d;
+    align-content: center;
 }
 
+.full-item-modal .card-body,
 .main .item-card .card-body {
     padding: 0 24px 24px;
 }
@@ -195,6 +206,7 @@ header .nav li:hover {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    cursor: pointer;
     border-radius: 12px 12px 0 0;
 }
 
@@ -213,11 +225,26 @@ footer {
     outline: none;
     transition: color 0.2s ease-in-out;
     padding: 12px;
+    position: relative;
 }
 
-.shop-cart-btn:hover,
-.shop-cart-btn.active,
-.shop-cart-btn:active {
+.shop-cart-btn .cart-count-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #e5aa02;
+    border-radius: 20px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    z-index: 0;
+}
+
+.shop-cart-btn:hover svg,
+.shop-cart-btn:active svg {
     color: #dc3d3d;
 }
 
@@ -229,4 +256,90 @@ footer {
     background: #fff;
     border-radius: 8px;
     padding: 24px;
+}
+
+.categories .chip {
+    background: lightgray;
+    border-radius: 50px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.categories .chip:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.full-item-modal {
+    width: 500px;
+    height: 600px;
+    background: #ffffff;
+    border-radius: 12px;
+    position: relative;
+}
+
+.modal-overlay {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.full-item-modal img {
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+}
+
+.full-item-modal .close-modal {
+    color: #ffffff;
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.delete-from-card {
+    transition: all 0.2s ease-in-out;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.delete-from-card:hover,
+.full-item-modal .close-modal:hover {
+    color: #dc3d3d;
+}
+
+.notification.success {
+    background: var(--success-color);
+}
+.notification.warning {
+    background: var(--warning-color);
+}
+.notification.error {
+    background: var(--error-color);
+}
+.notification.success {
+    background: var(--success-color);
+}
+
+
+.notification {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    padding: 24px 32px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 4px;
 }

@@ -24,6 +24,9 @@ const Header = (props) => {
 
                 >
                     <FaCartShopping/>
+                    <span className="cart-count-badge">
+                        {props.orders.length}
+                    </span>
                 </button>
                 {cartOpen && (
                     <div className={`shop-cart ${!props.orders.length ? 'empty' : ''}`}>
@@ -32,15 +35,16 @@ const Header = (props) => {
                                 <Order onDelete={props.onDelete} key={el.id} order={el}/>
                             ))
                         ) : (
-                            <div>Empty card</div>
+                            <div>Empty cart</div>
                         )}
 
                         {props.orders.forEach(el => {
-                            sum += Number.parseFloat(el.price)
+                            sum += Number.parseFloat(el.price);
                         })}
 
-                        {props.orders.length}
-                        Sum: {new Intl.NumberFormat().format(sum)}
+                        {props.orders.length > 0 && (
+                            <div>Total sum: {new Intl.NumberFormat().format(sum)}</div>
+                        )}
                     </div>
                 )}
             </div>

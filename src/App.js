@@ -2,9 +2,10 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Items from "./components/Items";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Categories from "./components/Categories";
 import ShowFullItem from "./components/ShowFullItem";
+import Notification from "./components/Notification";
 
 const App = () => {
     const [items, setItems] = useState(
@@ -62,8 +63,23 @@ const App = () => {
 
     const [fullItem, setFullItem] = useState({})
     const [showFullItem, setShowFullItem] = useState(false)
+    const [notification, setNotification] = useState({
+        type: '',
+        text: ''
+    })
     const [currentItems, setCurrentItems] = useState(items)
     const [orders, setOrders] = useState([])
+
+    useEffect(() => {
+        if (notification.text) {
+            const timer = setTimeout(() => {
+                setNotification(prevState => ({ ...prevState, text: '' }));
+            }, 20000);
+
+            // Clean up the timer when the component unmounts or when notification changes
+            return () => clearTimeout(timer);
+        }
+    }, [notification.text]);
 
     const addToOrder = (item) => {
         let isInArray = false
@@ -75,6 +91,11 @@ const App = () => {
         if (!isInArray) {
             setOrders([...orders, item])
         }
+
+        setNotification({
+            type: 'success',
+            text: 'Item was added to cart successfully.'
+        });
     }
 
     const deleteOrder = (id) => {
@@ -84,7 +105,6 @@ const App = () => {
     const onShowItem = (item) => {
         setFullItem(item)
         setShowFullItem(!showFullItem)
-        console.log(showFullItem)
     }
 
     const chooseCategory = (category) => {
@@ -101,10 +121,13 @@ const App = () => {
             <div className="main">
                 <Hero/>
                 <Categories chooseCategory={chooseCategory}/>
-                <Items onShowItem={onShowItem} items={currentItems} onAdd={addToOrder} />
+                <Items onShowItem={onShowItem} items={currentItems} onAdd={addToOrder}/>
             </div>
             {showFullItem && (
                 <ShowFullItem item={fullItem} onAdd={addToOrder} onShowItem={onShowItem}/>
+            )}
+            {notification.text && (
+                <Notification notificationText={notification.text} notificationType={notification.type}/>
             )}
             <Footer/>
         </div>
